@@ -1,0 +1,12 @@
+{
+  "development": {
+    "dialect": "sqlite",
+    "storage": "db/slugscan.db"
+  },
+  "test": {
+    "use_env_variable": "TEST_DB_URL"
+  },
+  "production": {
+    "use_env_variable": "DB_URL"
+  }
+}
