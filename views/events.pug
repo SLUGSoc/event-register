@@ -1,1 +1,6 @@
 extends ./layout
+
+block main
+  ul
+    for event in events
+      li= event.name

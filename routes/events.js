@@ -1,15 +1,18 @@
 'use strict'
 
-const { Event } = require('../db/models')
+const { Event, Member } = require('../db/models')
 
 const init = router => {
   router.get('/events', index)
+  router.get('/members', members)
 }
 
 const index = async ctx => {
-  ctx.body = await Event.findAll()
+  await ctx.render('events', { events: await Event.findAll() })
+}
 
-  // await ctx.render("index")
+const members = async ctx => {
+  await ctx.render('members', { members: await Member.findAll() })
 }
 
 module.exports = {
