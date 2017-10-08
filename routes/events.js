@@ -1,5 +1,7 @@
 'use strict'
 
+const { groupBy } = require('lodash')
+
 const { Event, Member, Register } = require('../db/models')
 
 const init = router => {
@@ -36,18 +38,21 @@ const members = async ctx => {
 
 const register = async ctx => {
   await ctx.render('register', {
-    register: await Register.findAll({
-      include: [
-        {
-          model: Member,
-          as: 'member'
-        },
-        {
-          model: Event,
-          as: 'event'
-        }
-      ]
-    })
+    register: groupBy(
+      await Register.findAll({
+        include: [
+          {
+            model: Member,
+            as: 'member'
+          },
+          {
+            model: Event,
+            as: 'event'
+          }
+        ]
+      }),
+      'event.name'
+    )
   })
 }
 

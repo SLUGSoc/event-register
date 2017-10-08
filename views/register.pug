@@ -1,6 +1,14 @@
 extends ./layout
 
 block main
-  ul
-    for entry in register
-      li= entry.member.fullName
+    for regs, eventName in register
+      h1= eventName
+      h2 Present
+      ul
+        for reg in regs.filter(x => x.present)
+          li= `${reg.member.fullName}`
+
+      h2 Absent
+      ul
+        for reg in regs.filter(x => !x.present)
+            li= `${reg.member.fullName}`
