@@ -10,13 +10,27 @@ const init = router => {
 
 const index = async ctx => {
   await ctx.render('events', {
-    events: await Event.findAll()
+    events: await Event.findAll({
+      include: [
+        {
+          model: Member,
+          as: 'attendees'
+        }
+      ]
+    })
   })
 }
 
 const members = async ctx => {
   await ctx.render('members', {
-    members: await Member.findAll()
+    members: await Member.findAll({
+      include: [
+        {
+          model: Event,
+          as: 'events'
+        }
+      ]
+    })
   })
 }
 

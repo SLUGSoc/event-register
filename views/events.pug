@@ -3,4 +3,8 @@ extends ./layout
 block main
   ul
     for event in events
-      li= event.name
+      li
+        = event.name
+        ul
+          for attendee in event.attendees
+            li= attendee.fullName

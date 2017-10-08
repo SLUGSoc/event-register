@@ -10,11 +10,6 @@ module.exports = (sequelize, DataTypes) => {
       hasPaid: DataTypes.BOOLEAN
     },
     {
-      classMethods: {
-        associate: function(models) {
-          // associations can be defined here
-        }
-      },
       getterMethods: {
         fullName() {
           return this.firstName + ' ' + this.lastName
@@ -30,5 +25,13 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   )
+
+  Member.associate = models => {
+    Member.belongsToMany(models.Event, {
+      through: models.Register,
+      as: 'events'
+    })
+  }
+
   return Member
 }

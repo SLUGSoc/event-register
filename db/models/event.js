@@ -5,13 +5,15 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: DataTypes.STRING
     },
-    {
-      classMethods: {
-        associate: function(models) {
-          // associations can be defined here
-        }
-      }
-    }
+    {}
   )
+
+  Event.associate = models => {
+    Event.belongsToMany(models.Member, {
+      through: models.Register,
+      as: 'attendees'
+    })
+  }
+
   return Event
 }
