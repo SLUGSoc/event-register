@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node app.js",
     "start:dev":
-      "DEBUG=app:* nodemon -d 1 -e js -w app.js -w server.js -w views -w routes server.js",
+      "DEBUG=app:* nodemon -d 1 -e js -w app.js -w server.js -w db -w views -w routes server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "precommit": "lint-staged"
   },

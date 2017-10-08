@@ -1,0 +1,6 @@
+extends ./layout
+
+block main
+  ul
+    for entry in register
+      li= entry.member.fullName
