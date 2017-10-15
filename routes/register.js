@@ -1,5 +1,7 @@
 'use strict'
 
+const { sortBy } = require('lodash')
+
 const { Member, Register, Event } = require('../db/models')
 
 const init = router => {
@@ -10,9 +12,8 @@ const init = router => {
 }
 
 const register = async ctx => {
-  await ctx.render('register', {
-    event: await Event.findById(ctx.params.id),
-    register: await Register.findAll({
+  const register = sortBy(
+    await Register.findAll({
       where: {
         eventId: ctx.params.id
       },
@@ -22,7 +23,19 @@ const register = async ctx => {
           as: 'member'
         }
       ]
-    })
+    }),
+    'member.fullName'
+  )
+
+  const event = await Event.findById(ctx.params.id)
+
+  await ctx.render('register', {
+    event,
+    register: {
+      all: register,
+      present: register.filter(x => x.present),
+      absent: register.filter(x => !x.present)
+    }
   })
 }
 
