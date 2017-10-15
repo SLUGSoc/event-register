@@ -7,13 +7,15 @@ block main
       for reg in register.filter(x => x.present)
         li
           a(href=`/member/${reg.member.id}`)= reg.member.fullName
-          a(href=`/register/${event.id}/mark/${reg.member.id}/out`) Mark absent
+          form(method="post" action=`/register/${event.id}/mark/${reg.member.id}/out`)
+              input(type="submit" value="Mark absent")
 
     h2 Absent
     ul
       for reg in register.filter(x => !x.present)
           li
             a(href=`/member/${reg.member.id}`)= reg.member.fullName
-            a(href=`/register/${event.id}/mark/${reg.member.id}/in`) Mark present
+            form(method="post" action=`/register/${event.id}/mark/${reg.member.id}/in`)
+              input(type="submit" value="Mark present")
 
-    a(href=`/register/${event.id}/end`)= `Mark all ${event.name} attendees as absent.`
+    a(href=`/register/${event.id}/end`)= `End Event (This will mark everyone absent) =>`

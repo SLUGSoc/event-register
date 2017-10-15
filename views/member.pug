@@ -3,7 +3,10 @@ extends ./layout
 block main
   h1= member.fullName
 
-  h2 Events
+  h2 Last seen at
+  a(href=`/event/${lastEvent.id}`)= lastEvent.name
+
+  h2 Attended
   ul
     for event in member.events
       li: a(href=`/event/${event.id}`)= event.name

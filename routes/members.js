@@ -1,6 +1,6 @@
 'use strict'
 
-const { groupBy } = require('lodash')
+const { maxBy } = require('lodash')
 
 const { Member, Event } = require('../db/models')
 
@@ -23,15 +23,18 @@ const list = async ctx => {
 }
 
 const member = async ctx => {
+  const member = await Member.findById(ctx.params.id, {
+    include: [
+      {
+        model: Event,
+        as: 'events'
+      }
+    ]
+  })
+
   await ctx.render('member', {
-    member: await Member.findById(ctx.params.id, {
-      include: [
-        {
-          model: Event,
-          as: 'events'
-        }
-      ]
-    })
+    member,
+    lastEvent: maxBy(member.events, 'updatedAt')
   })
 }
 

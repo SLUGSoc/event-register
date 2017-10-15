@@ -1,14 +1,12 @@
 'use strict'
 
-const { groupBy } = require('lodash')
-
 const { Member, Register, Event } = require('../db/models')
 
 const init = router => {
   router.get('/register/:id', register)
-  router.get('/register/:id/end', end)
-  router.get('/register/:id/mark/:member/in', markIn)
-  router.get('/register/:id/mark/:member/out', markOut)
+  router.post('/register/:id/end', end)
+  router.post('/register/:id/mark/:member/in', markIn)
+  router.post('/register/:id/mark/:member/out', markOut)
 }
 
 const register = async ctx => {

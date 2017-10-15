@@ -1,14 +1,10 @@
 'use strict'
 
-const { groupBy } = require('lodash')
-
 const { Event, Member } = require('../db/models')
 
 const init = router => {
   router.get('/events', list)
   router.get('/event/:id', event)
-  // router.get('/members', members)
-  // router.get('/register', register)
 }
 
 const list = async ctx => {
