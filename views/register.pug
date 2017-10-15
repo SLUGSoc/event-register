@@ -1,14 +1,19 @@
 extends ./layout
 
 block main
-    for regs, eventName in register
-      h1= eventName
-      h2 Present
-      ul
-        for reg in regs.filter(x => x.present)
-          li: a(href=`/member/${reg.member.id}`)= reg.member.fullName
+    h1= event.name
+    h2 Present
+    ul
+      for reg in register.filter(x => x.present)
+        li
+          a(href=`/member/${reg.member.id}`)= reg.member.fullName
+          a(href=`/register/${event.id}/mark/${reg.member.id}/out`) Mark absent
 
-      h2 Absent
-      ul
-        for reg in regs.filter(x => !x.present)
-            li: a(href=`/member/${reg.member.id}`)= reg.member.fullName
+    h2 Absent
+    ul
+      for reg in register.filter(x => !x.present)
+          li
+            a(href=`/member/${reg.member.id}`)= reg.member.fullName
+            a(href=`/register/${event.id}/mark/${reg.member.id}/in`) Mark present
+
+    a(href=`/register/${event.id}/end`)= `Mark all ${event.name} attendees as absent.`
