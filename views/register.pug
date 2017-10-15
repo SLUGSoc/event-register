@@ -6,9 +6,9 @@ block main
       h2 Present
       ul
         for reg in regs.filter(x => x.present)
-          li= `${reg.member.fullName}`
+          li: a(href=`/member/${reg.member.id}`)= reg.member.fullName
 
       h2 Absent
       ul
         for reg in regs.filter(x => !x.present)
-            li= `${reg.member.fullName}`
+            li: a(href=`/member/${reg.member.id}`)= reg.member.fullName

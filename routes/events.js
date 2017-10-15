@@ -2,17 +2,18 @@
 
 const { groupBy } = require('lodash')
 
-const { Event, Member, Register } = require('../db/models')
+const { Event, Member } = require('../db/models')
 
 const init = router => {
-  router.get('/events', index)
-  router.get('/members', members)
-  router.get('/register', register)
+  router.get('/events', list)
+  router.get('/event/:id', event)
+  // router.get('/members', members)
+  // router.get('/register', register)
 }
 
-const index = async ctx => {
+const list = async ctx => {
   await ctx.render('events', {
-    events: await Event.findAll({
+    events: await Event.all({
       include: [
         {
           model: Member,
@@ -23,36 +24,16 @@ const index = async ctx => {
   })
 }
 
-const members = async ctx => {
-  await ctx.render('members', {
-    members: await Member.findAll({
+const event = async ctx => {
+  await ctx.render('event', {
+    event: await Event.findById(ctx.params.id, {
       include: [
         {
-          model: Event,
-          as: 'events'
+          model: Member,
+          as: 'attendees'
         }
       ]
     })
-  })
-}
-
-const register = async ctx => {
-  await ctx.render('register', {
-    register: groupBy(
-      await Register.findAll({
-        include: [
-          {
-            model: Member,
-            as: 'member'
-          },
-          {
-            model: Event,
-            as: 'event'
-          }
-        ]
-      }),
-      'event.name'
-    )
   })
 }
 

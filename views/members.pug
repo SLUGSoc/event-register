@@ -4,7 +4,7 @@ block main
   ul
     for member in members
       li
-        =member.fullName
-        ul
-          for event in member.events
-            li= event.name
+        a(href=`/member/${member.id}`)= member.fullName
+        //- ul
+        //-   for event in member.events
+        //-     li= event.name

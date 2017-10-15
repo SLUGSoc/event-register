@@ -28,7 +28,10 @@ app.use(
   })
 )
 
+// routes initialisation
 require('./routes/events').init(router)
+require('./routes/members').init(router)
+require('./routes/register').init(router)
 
 app.use(router.routes(), router.allowedMethods())
 

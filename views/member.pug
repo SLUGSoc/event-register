@@ -1,0 +1,9 @@
+extends ./layout
+
+block main
+  h1= member.fullName
+
+  h2 Events
+  ul
+    for event in member.events
+      li: a(href=`/event/${event.id}`)= event.name
