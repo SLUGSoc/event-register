@@ -1,7 +1,7 @@
 {
   "development": {
     "dialect": "sqlite",
-    "storage": "db/slugscan.db"
+    "storage": "server/db/slugscan.db"
   },
   "test": {
     "use_env_variable": "TEST_DB_URL"

@@ -4,14 +4,17 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production node app.js",
-    "start:dev":
-      "DEBUG=app:* nodemon -d 1 -e js -w app.js -w server.js -w db -w views -w routes server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ng serve",
+    "start:dev": "DEBUG=app:* nodemon -d 1 -e js -w server server/server.js",
+    "ng": "ng",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,json}": ["eclint fix", "prettier --write", "git add"],
+    "*.{ts,js,json}": ["eclint fix", "prettier --write", "git add"],
     "*.{html,css,md}": ["eclint fix", "git add"]
   },
   "repository": {
@@ -21,24 +24,56 @@
   "author": "robjtede",
   "license": "ISC",
   "dependencies": {
+    "@angular/animations": "^5.0.0",
+    "@angular/common": "^5.0.0",
+    "@angular/compiler": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@angular/http": "^5.0.0",
+    "@angular/platform-browser": "^5.0.0",
+    "@angular/platform-browser-dynamic": "^5.0.0",
+    "@angular/router": "^5.0.0",
+    "core-js": "^2.4.1",
     "date-fns": "^1.29.0",
     "debug": "^3.1.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-json": "^2.0.2",
     "koa-router": "^7.2.1",
+    "koa-send": "^4.1.1",
     "koa-static": "^4.0.1",
     "koa-views": "^6.1.1",
     "pug": "^2.0.0-rc.4",
-    "sequelize": "^4.13.5",
+    "rxjs": "^5.5.2",
+    "sequelize": "^4.22.4",
     "sequelize-cli": "^3.0.0",
-    "sqlite3": "^3.1.13"
+    "sqlite3": "^3.1.13",
+    "zone.js": "^0.8.14"
   },
   "devDependencies": {
+    "@angular/cli": "^1.5.0",
+    "@angular/compiler-cli": "^5.0.0",
+    "@angular/language-service": "^5.0.0",
+    "@types/jasmine": "~2.5.53",
+    "@types/jasminewd2": "~2.0.2",
+    "@types/node": "~6.0.60",
+    "codelyzer": "~3.2.0",
     "eclint": "^2.4.3",
     "husky": "^0.14.3",
-    "lint-staged": "^4.2.3",
+    "jasmine-core": "~2.6.2",
+    "jasmine-spec-reporter": "~4.1.0",
+    "karma": "~1.7.0",
+    "karma-chrome-launcher": "~2.1.1",
+    "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^1.2.1",
+    "karma-jasmine": "~1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "lint-staged": "^4.3.0",
     "nodemon": "^1.12.1",
-    "prettier": "^1.7.4"
+    "prettier": "^1.7.4",
+    "protractor": "~5.1.2",
+    "ts-node": "~3.2.0",
+    "tslint": "~5.7.0",
+    "typescript": "~2.4.2"
   }
 }
