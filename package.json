@@ -4,9 +4,13 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "ng serve",
-    "start:dev": "DEBUG=app:* nodemon -d 1 -e js -w server server/server.js",
+    "start:server:dev":
+      "DEBUG=app:* nodemon -d 1 -e js -w server server/server.js",
+    "start:client:dev": "ng build -w --aot",
+    "dev:watch":
+      "browser-sync start --proxy 'http://localhost:3000' --files client/dist --reload-debounce 2000 --no-ui --no-open --ws",
     "ng": "ng",
+    "serve": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -14,8 +18,8 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{ts,js,json}": ["eclint fix", "prettier --write", "git add"],
-    "*.{html,css,md}": ["eclint fix", "git add"]
+    "*.{ts,js,json,css,md}": ["eclint fix", "prettier --write", "git add"],
+    "*.{ts,js,json,css,md,html}": ["eclint fix", "git add"]
   },
   "repository": {
     "type": "git",

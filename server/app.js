@@ -53,9 +53,6 @@ app.use(async function(ctx, next) {
   if (ctx.path.substr(0, 5).toLowerCase() === '/api/') {
     await next()
     return
-  } else if (await send(ctx, ctx.path, sendOpts)) {
-    // file exists and request successfully served so do nothing
-    return
   } else if (ctx.path.includes('.')) {
     // file does not exist so do nothing and koa will return 404 by default
     // we treat any path with a dot '.' in it as a request for a file
