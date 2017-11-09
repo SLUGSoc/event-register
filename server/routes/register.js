@@ -12,31 +12,22 @@ const init = router => {
 }
 
 const register = async ctx => {
-  const register = sortBy(
-    await Register.findAll({
-      where: {
-        eventId: ctx.params.id
-      },
-      include: [
-        {
-          model: Member,
-          as: 'member'
-        }
-      ]
-    }),
-    'member.fullName'
-  )
-
-  const event = await Event.findById(ctx.params.id)
-
-  await ctx.render('register', {
-    event,
-    register: {
-      all: register,
-      present: register.filter(x => x.present),
-      absent: register.filter(x => !x.present)
+  const options = {
+    where: {
+      eventId: ctx.params.id
     }
-  })
+  }
+
+  if (match(ctx, 'include', 'member')) {
+    options.include = [
+      {
+        model: Member,
+        as: 'member'
+      }
+    ]
+  }
+
+  ctx.body = sortBy(await Register.all(options), 'member.fullName')
 }
 
 const end = async ctx => {

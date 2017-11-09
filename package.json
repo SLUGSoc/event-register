@@ -4,6 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start":
+      "ng build --aot --prod && NODE_ENV=production node server/server.js",
     "start:server:dev":
       "DEBUG=app:* nodemon -d 1 -e js -w server server/server.js",
     "start:client:dev": "ng build -w --aot",
